@@ -1,4 +1,4 @@
-// doubly linked list - insertion
+// doubly linked list - deletion
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -24,8 +24,8 @@ void insert(struct Node **head,int data,int pos)
 	{
 		if(pos==1)
 		{
-			*head->prev = newNode;
-			newNode->next=*head;
+			temp->prev = newNode;
+			newNode->next=temp;
 			newNode->prev = NULL;
 			*head=newNode;
 		}
@@ -47,6 +47,33 @@ void insert(struct Node **head,int data,int pos)
 	}
 }
 
+void deleteNode(struct Node **head,int pos)
+{
+	struct Node * temp = *head;
+//	struct Node *prev=NULL;
+	if(pos==1)
+	{
+		temp->next->prev=NULL;
+		*head = temp->next;
+		free(temp);
+	}
+	else
+	{
+		int count =1;
+		while(count!=pos && temp!=NULL)
+		{
+			temp=temp->next;
+			count++;
+			
+		}
+		
+		temp->prev->next=temp->next;
+		if(temp->next!=NULL)
+		temp->next->prev=temp->prev;
+		free(temp);
+	}
+}
+
 void print(struct Node *head)
 {
 	struct Node * temp = head;
@@ -63,11 +90,19 @@ int main()
 {
 	int n,i,pos;
 	struct Node * head = NULL;
-	for(i=0;i<10;i++){
+	for(i=0;i<7;i++){
 	printf("Enter the data to be added and it's position \n");
 	scanf("%d %d",&n,&pos);
 	insert(&head,n,pos);
 	print(head);
 }
+
+for(i=0;i<4;i++)
+{
+	printf("Enter the node position you want to delete\n");
+		scanf("%d",&pos);
+	deleteNode(&head,pos);
+	print(head);
+	}	
 	
 }
