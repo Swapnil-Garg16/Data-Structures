@@ -1,4 +1,5 @@
 //nth node from the end of Linked List
+
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -56,6 +57,7 @@ int countNodes(struct Node *head)
 	return count;
 }
 
+// O(n) solution in 2 scans - one for counting the length of linked list and one for getting the element count-n+1
 void nthNodeFromEnd(struct Node *head, int n)
 {
 	int count = countNodes(head);
@@ -77,6 +79,34 @@ void nthNodeFromEnd(struct Node *head, int n)
 	
 }
 
+// O(n) solution with one scan using 2 pointers
+void nthFromEnd(struct Node *head, int n)
+{
+	struct Node *temp, *temp1;
+	temp=temp1=head;
+	int count = countNodes(head);
+	if(n>count)
+	{
+		printf("Node doesn't exist\n");
+		return ;
+	}
+	int pos=1;
+	while(pos!=n)
+	{
+		temp=temp->next;
+		pos++;
+	}
+	
+	while(pos!=count && temp->next!=NULL)
+	{
+		temp=temp->next;
+		temp1=temp1->next;
+		pos++;
+	}
+	
+	printf("%d \n",temp1->data);
+}
+
 int main()
 {
 	int n,i,pos;
@@ -91,7 +121,7 @@ for(i=0;i<4;i++)
 {
 printf("Enter n\n");
 scanf("%d",&n);
-nthNodeFromEnd(head,n);
+nthFromEnd(head,n);
 
 }
 	
