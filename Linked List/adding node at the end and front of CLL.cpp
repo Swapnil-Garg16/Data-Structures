@@ -41,6 +41,7 @@ void print(struct Node *head)
 	printf("\n");
 }
 
+//inserting a node at the end of circular linked list
 void insertAtEnd(struct Node **head, int data)
 {
 	struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
@@ -61,6 +62,7 @@ void insertAtEnd(struct Node **head, int data)
 	}
 }
 
+//inserting a node at front of the circular linked list
 void insertNodeAtFront(struct Node **head, int data)
 {
 		struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
@@ -83,6 +85,54 @@ void insertNodeAtFront(struct Node **head, int data)
 		*head = newNode;
 }
 
+//delete last node from circular linked list
+void deleteLastNode(struct Node **head)
+{
+	struct Node *temp = *head;
+	struct Node *prev = NULL;
+	if(*head==NULL)
+	{
+		printf("list is empty\n");
+		return;
+	}
+	
+	while(temp->next!=*head)
+	{
+		prev = temp;
+		temp=temp->next;
+	}
+	prev->next = temp->next;
+	free(temp);
+	return;
+	
+	
+}
+
+//delete first node from circular linked list
+void deleteFirstNode(struct Node **head)
+{
+	struct Node *temp = *head;
+	struct Node *prev = NULL;
+	if(*head==NULL)
+	{
+		printf("list is empty\n");
+		return;
+	}
+	
+	do{
+			prev = temp;
+		temp=temp->next;
+	}while(temp!=*head);
+
+	prev->next = temp->next;
+	*head = temp->next;
+	free(temp);
+	return;
+	
+	
+}
+
+
 int main()
 {
 	struct Node *head = NULL;
@@ -94,7 +144,16 @@ int main()
 	insert(&head,55);
 	print(head);
 	insertAtEnd(&head,60);
+		print(head);
 	insertNodeAtFront(&head,70);
+	print(head);
+	deleteLastNode(&head);
+	print(head);
+	deleteFirstNode(&head);
+	print(head);
+		deleteLastNode(&head);
+	print(head);
+	deleteFirstNode(&head);
 	print(head);
 }
 
