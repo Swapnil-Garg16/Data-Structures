@@ -61,7 +61,27 @@ void insertAtEnd(struct Node **head, int data)
 	}
 }
 
-void insertNodeAtFront()
+void insertNodeAtFront(struct Node **head, int data)
+{
+		struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+	struct Node *temp = *head;
+	newNode ->data = data;
+	if(*head==NULL)
+	{
+		newNode->next = newNode;
+	
+	}
+	else
+	{
+		while(temp->next!=*head)
+		temp=temp ->next;
+		
+		temp->next = newNode;
+		newNode->next = *head;
+	}
+	
+		*head = newNode;
+}
 
 int main()
 {
@@ -74,6 +94,7 @@ int main()
 	insert(&head,55);
 	print(head);
 	insertAtEnd(&head,60);
+	insertNodeAtFront(&head,70);
 	print(head);
 }
 
