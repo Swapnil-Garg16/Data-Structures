@@ -198,7 +198,30 @@ void mergeWithoutExtraSpace ( struct Node *head1, struct Node *head2, struct Nod
 	
 }
 
-void recursiveMerge ( struct Node *head)
+//recusrsive merge
+struct Node *recursiveMerge ( struct Node *head1, struct Node *head2)
+{
+	if(head1==NULL)
+	return head2;
+	
+	if(head2==NULL)
+	return head1;
+
+struct Node *head3 = NULL;
+	
+	if(head1->data<=head2->data)
+	{
+		head3=head1;
+		head3->next = recursiveMerge(head1->next, head2);
+	}
+	else
+	{
+		head3 = head2;
+		head3->next = recursiveMerge(head1,head2->next );
+	}
+	
+	return head3;
+}
 
 
 int main()
@@ -226,7 +249,7 @@ int main()
 	
 }
 
-mergeWithoutExtraSpace(head1,head2, &head3);
+    head3 = recursiveMerge(head1,head2);
 print(head3);
  
 }
