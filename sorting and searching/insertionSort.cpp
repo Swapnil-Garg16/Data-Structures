@@ -8,19 +8,16 @@ void insertionSort(int *arr, int n)
 	int i,j,t;
 	for(i=1;i<n;i++)
 	{
-		if(arr[i]<arr[i-1])
-		{
 		
-			j=i;
-			while((arr[j]<arr[j-1]) && j>0)
+		    t=arr[i];
+			j=i-1;
+			while(arr[j]>t && j>=0)
 			{
-				t = arr[j-1];
-				arr[j-1] = arr[j];
-				arr[j]=t;
+				arr[j+1]=arr[j];
 				j--;
-				
-							}
-		}
+			}
+			
+			arr[j+1]=t;
 	}
 }
 
